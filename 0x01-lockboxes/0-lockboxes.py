@@ -8,6 +8,8 @@ def canUnlockAll(boxes):
     """
         A method that determines if all the boxes can be opened.
     """
+    if (type(boxes) is not list or len(boxes) == 0):
+        return False
     keys = set(boxes[0])
     keys.update({box for k in keys for box in boxes[k]})
     for i in range(1, len(boxes)):
