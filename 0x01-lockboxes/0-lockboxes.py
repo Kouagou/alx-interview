@@ -8,12 +8,14 @@ def canUnlockAll(boxes):
     """
         A method that determines if all the boxes can be opened.
     """
-    if (type(boxes) is not list or len(boxes) == 0):
-        return False
-    keys = set(boxes[0])
-    keys.update({box for k in keys for box in boxes[k]})
-    for i in range(1, len(boxes)):
-        if i not in keys:
-            return False
-        keys.update({x for x in boxes[i]})
-    return True
+    n = len(boxes)
+    seen_boxes = set([0])
+    unseen_boxes = set(boxes[0]).difference(set([0]))
+    while len(unseen_boxes) > 0:
+        boxIdx = unseen_boxes.pop()
+        if not boxIdx or boxIdx >= n or boxIdx < 0:
+            continue
+        if boxIdx not in seen_boxes:
+            unseen_boxes = unseen_boxes.union(boxes[boxIdx])
+            seen_boxes.add(boxIdx)
+    return n == len(seen_boxes)
