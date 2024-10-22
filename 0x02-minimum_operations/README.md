@@ -1,0 +1,1 @@
+Solutions for 0x02. Minimum Operations project.
