@@ -62,10 +62,3 @@ def validUTF8(data):
             return False
     return True
 
-
-def check_next_body(data, i, span):
-    next_body = list(map(
-        lambda x: x & 0b11000000 == 0b10000000,
-        data[i + 1: i + span],
-    ))
-    return all(next_body)
